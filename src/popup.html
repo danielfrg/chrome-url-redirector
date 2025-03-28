@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html class="dark">
+
+<head>
+    <title>URL Redirector</title>
+    <script src="/static/tailwind-4.0.10.js"></script>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900">
+    <div class="container p-4 w-64">
+        <div class="flex justify-center items-center mb-2">
+            <h1 class="text-xl font-bold text-gray-800 dark:text-white">URL Redirector</h1>
+        </div>
+
+        <div class="mb-4">
+            <button id="open-options"
+                class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md transition-colors">Open
+                Settings</button>
+        </div>
+
+        <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded-md border border-gray-200 dark:border-gray-600">
+            <p class="text-sm text-gray-700 dark:text-gray-300">Current active patterns: <span id="pattern-count"
+                    class="font-semibold">0</span></p>
+        </div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>

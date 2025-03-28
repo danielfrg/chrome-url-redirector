@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html class="dark">
+
+<head>
+    <title>URL Redirector Options</title>
+    <script src="/static/tailwind-4.0.10.js"></script>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900 p-6">
+    <div class="container mx-auto max-w-3xl bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-800 dark:text-white">URL Redirector Options</h1>
+            <!-- <div class="flex items-center">
+                <span class="mr-2 text-gray-700 dark:text-gray-300">Theme:</span>
+                <select id="theme-selector"
+                    class="bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-md px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="system">System</option>
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+            </div> -->
+        </div>
+
+        <div class="mb-8">
+            <h2 class="text-xl font-semibold mb-4 text-gray-700 dark:text-gray-200">Redirect Patterns</h2>
+            <div id="patterns-list" class="space-y-4">
+                <!-- Patterns will be added here dynamically -->
+            </div>
+
+            <div class="mt-4">
+                <button id="add-pattern"
+                    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md transition-colors">Add New
+                    Pattern</button>
+            </div>
+        </div>
+
+        <div class="flex items-center justify-between border-t dark:border-gray-700 pt-4">
+            <div id="status" class="text-green-600 dark:text-green-400"></div>
+            <button id="save"
+                class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-md transition-colors">Save</button>
+        </div>
+    </div>
+
+    <template id="pattern-template">
+        <div
+            class="pattern-item bg-gray-50 dark:bg-gray-700 p-4 rounded-md border border-gray-200 dark:border-gray-600">
+            <div class="space-y-4">
+                <div class="grid grid-cols-1 gap-2">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">URL Pattern
+                        (wildcard):</label>
+                    <input type="text"
+                        class="pattern-input w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white"
+                        placeholder="http://go/*">
+                </div>
+                <div class="grid grid-cols-1 gap-2">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Redirect Template:</label>
+                    <input type="text"
+                        class="redirect-input w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white"
+                        placeholder="https://go.example.com/$1">
+                    <div class="text-xs text-gray-500 dark:text-gray-400">Use $1 to insert the captured group from the
+                        pattern</div>
+                </div>
+            </div>
+            <div class="mt-4 flex justify-end">
+                <button
+                    class="remove-pattern bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md transition-colors">Remove</button>
+            </div>
+        </div>
+    </template>
+
+    <script src="options.js"></script>
+</body>
+
+</html>
