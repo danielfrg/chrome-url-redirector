@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "URL Redirector",
-  "version": "1.0",
+  "name": "URL Redirector. No data collected and Open Source",
   "description": "Redirects URLs based on patterns",
+  "version": "1.0",
   "icons": {
     "16": "static/favicon-16x16.png",
     "32": "static/favicon-32x32.png",
@@ -15,16 +15,12 @@
   "host_permissions": [
     "<all_urls>"
   ],
-  "background": {
-    "service_worker": "src/background.js"
-  },
   "action": {
     "default_popup": "src/popup.html",
-    "default_icon": {
-      "16": "static/favicon-16x16.png",
-      "32": "static/favicon-32x32.png",
-      "128": "static/redirect@2x.png"
-    }
+    "default_icon": "static/redirect@2x.png"
+  },
+  "background": {
+    "service_worker": "src/background.js"
   },
   "options_ui": {
     "page": "src/options.html",
