@@ -1,0 +1,37 @@
+{
+  "name": "url-redirector",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "build": "wxt build",
+    "zip": "wxt zip",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "test": "node --test tests/*.test.js",
+    "postinstall": "wxt prepare",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "lint": "oxlint"
+  },
+  "dependencies": {
+    "@kenn-io/kit-ui": "github:kenn-io/kit-ui#dc7a4184843343cb1fa639ea6e77b68d13e755af",
+    "@lucide/svelte": "^1.21.0"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^7.2.0",
+    "@types/chrome": "^0.1.0",
+    "@wxt-dev/module-svelte": "^2.0.5",
+    "oxfmt": "^0.76.0",
+    "oxlint": "^1.91.0",
+    "svelte": "^5.56.8",
+    "svelte-check": "^4.7.4",
+    "typescript": "^6.0.3",
+    "wxt": "^0.21.5"
+  },
+  "engines": {
+    "node": ">=26.0.0 <27",
+    "pnpm": "10.28.0"
+  },
+  "packageManager": "pnpm@10.28.0"
+}
