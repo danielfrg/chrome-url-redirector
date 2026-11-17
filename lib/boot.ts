@@ -1,8 +1,8 @@
 import { mount, type Component } from "svelte";
-import "../src/app.css";
 import "../src/design-system/theme/tokens.css";
 import "../src/design-system/theme/components.css";
 import "../src/design-system/custom/theme-toggle/theme-toggle.css";
+import "../src/app.css";
 
 /** Applies the saved color scheme before the first paint (extension pages allow no inline script), then mounts. */
 export function boot(App: Component) {
