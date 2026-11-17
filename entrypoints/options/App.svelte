@@ -1,6 +1,12 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { Button, Checkbox, EmptyState, TextInput, ThemeToggle } from "@kenn-io/kit-ui";
+  import { Button } from "@ui-sdk/svelte/button";
+  import { Field, FieldLabel } from "@ui-sdk/svelte/field";
+  import { Input } from "@ui-sdk/svelte/input";
+  import { Preferences } from "@ui-sdk/svelte/preferences";
+  import { ThemeToggle } from "../../src/design-system/custom/theme-toggle";
+  import { colorScheme } from "../../lib/color-scheme";
+  import CheckField from "../../lib/components/CheckField.svelte";
   import { ruleRegex } from "../../lib/rules.js";
   import { loadRules, saveRules, RULES_KEY } from "../../lib/storage.js";
 
@@ -73,137 +79,74 @@
   }
 </script>
 
-<main class="page">
-  <header class="page-header">
-    <div class="brand">
-      <img src="/icon/128.png" alt="" width="28" height="28" />
-      <h1>URL Redirector</h1>
-    </div>
-    <ThemeToggle />
-  </header>
+<Preferences preferences={[colorScheme]}>
+  <main class="page">
+    <header class="page-header">
+      <div class="brand">
+        <img src="/icon/128.png" alt="" width="28" height="28" />
+        <h1>URL Redirector</h1>
+      </div>
+      <ThemeToggle {colorScheme} />
+    </header>
 
-  {#if error}
-    <p class="error" role="alert">{error}</p>
-  {/if}
-
-  <form class="panel" onsubmit={save} oninput={() => ((dirty = true), (message = ""))}>
-    <div class="panel-head">
-      <h2>Redirect rules</h2>
-      <span class="feedback" role="status" aria-live="polite" hidden={!message}>{message}</span>
-    </div>
-    <p class="muted hint">
-      Use <code>*</code> in the pattern to capture text, and <code>$1</code>, <code>$2</code>… in
-      the redirect to insert it. With Regex on, the pattern is a regular expression and its
-      capture groups feed <code>$1</code>… The first matching rule wins.
-    </p>
-
-    {#if rules.length}
-      <ul class="rule-list">
-        {#each rules as rule, i (rule.id)}
-          <li class="rule-row">
-            <label class="field">
-              <span>URL pattern</span>
-              <TextInput placeholder="go/*" autocomplete="off" block bind:value={rule.pattern} />
-            </label>
-            <label class="field">
-              <span>Redirect to</span>
-              <TextInput
-                placeholder="https://go.example.com/$1"
-                autocomplete="off"
-                block
-                bind:value={rule.redirect}
-              />
-            </label>
-            <Checkbox
-              label="Regex"
-              checked={rule.regex === true}
-              onchange={(checked) => ((rule.regex = checked), (dirty = true), (message = ""))}
-            />
-            <Button
-              tone="danger"
-              surface="soft"
-              ariaLabel={`Remove rule ${i + 1}`}
-              onclick={() => remove(rule.id)}
-            >
-              Remove
-            </Button>
-          </li>
-        {/each}
-      </ul>
-    {:else}
-      <EmptyState title="No rules yet" description="Add a rule to start redirecting." />
+    {#if error}
+      <p class="error" role="alert">{error}</p>
     {/if}
 
-    <div class="actions">
-      <Button onclick={add}>Add rule</Button>
-      <Button type="submit" tone="info" surface="solid" disabled={!dirty}>Save</Button>
-    </div>
-  </form>
-</main>
+    <form class="panel" onsubmit={save} oninput={() => ((dirty = true), (message = ""))}>
+      <div class="panel-head">
+        <h2>Redirect rules</h2>
+        <span class="feedback" role="status" aria-live="polite" hidden={!message}>{message}</span>
+      </div>
+      <p class="muted hint">
+        Use <code>*</code> in the pattern to capture text, and <code>$1</code>, <code>$2</code>… in
+        the redirect to insert it. With Regex on, the pattern is a regular expression and its
+        capture groups feed <code>$1</code>… The first matching rule wins.
+      </p>
 
-<style>
-  .page {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 32px 24px 96px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .page-header,
-  .panel-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-  }
-  .panel {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding: 16px;
-    background: var(--bg-surface);
-    border: 1px solid var(--border-default);
-    border-radius: var(--radius-lg);
-  }
-  h2 {
-    font-size: var(--font-size-md);
-    font-weight: 600;
-  }
-  .hint {
-    font-size: var(--font-size-sm, 13px);
-  }
-  .error {
-    color: var(--accent-red);
-  }
-  .rule-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .rule-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr auto auto;
-    align-items: end;
-    gap: 12px;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border-muted);
-  }
-  .field {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    font-size: var(--font-size-sm, 13px);
-    color: var(--text-secondary);
-  }
-  .actions {
-    display: flex;
-    justify-content: space-between;
-    gap: 8px;
-  }
-  @media (max-width: 620px) {
-    .rule-row {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
+      {#if rules.length}
+        <ul class="rule-list">
+          {#each rules as rule, i (rule.id)}
+            <li class="rule-row">
+              <Field name={`pattern-${rule.id}`}>
+                <FieldLabel>URL pattern</FieldLabel>
+                <Input placeholder="go/*" autocomplete="off" bind:value={rule.pattern} />
+              </Field>
+              <Field name={`redirect-${rule.id}`}>
+                <FieldLabel>Redirect to</FieldLabel>
+                <Input
+                  placeholder="https://go.example.com/$1"
+                  autocomplete="off"
+                  bind:value={rule.redirect}
+                />
+              </Field>
+              <CheckField
+                checked={rule.regex === true}
+                onchange={(checked) => ((rule.regex = checked), (dirty = true), (message = ""))}
+              >
+                Regex
+              </CheckField>
+              <Button
+                data-variant="destructive"
+                aria-label={`Remove rule ${i + 1}`}
+                onclick={() => remove(rule.id)}
+              >
+                Remove
+              </Button>
+            </li>
+          {/each}
+        </ul>
+      {:else}
+        <div class="empty muted">
+          <strong>No rules yet</strong>
+          Add a rule to start redirecting.
+        </div>
+      {/if}
+
+      <div class="actions">
+        <Button onclick={add}>Add rule</Button>
+        <Button type="submit" data-variant="solid" disabled={!dirty}>Save</Button>
+      </div>
+    </form>
+  </main>
+</Preferences>

@@ -23,7 +23,7 @@ template:
 
 ## Development
 
-Built with [WXT](https://wxt.dev), Svelte 5 and kit-ui.
+Built with [WXT](https://wxt.dev), Svelte 5 and ui-sdk. `src/design-system/` is synced from the shared design system and never edited by hand.
 
 ```sh
 pnpm install

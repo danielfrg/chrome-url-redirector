@@ -1,19 +1,17 @@
 import { mount, type Component } from "svelte";
-import { initTheme, setThemeMode } from "@kenn-io/kit-ui";
-import "@kenn-io/kit-ui/theme.css";
-import "../assets/theme.css";
-import "../assets/app.css";
-import "../assets/components.css";
+import "../src/app.css";
+import "../src/design-system/theme/tokens.css";
+import "../src/design-system/theme/components.css";
+import "../src/design-system/custom/theme-toggle/theme-toggle.css";
 
-const THEME_KEY = "url-redirector-theme";
-
-/** Applies the shared theme (charcoal by default) and mounts a page. */
+/** Applies the saved color scheme before the first paint (extension pages allow no inline script), then mounts. */
 export function boot(App: Component) {
-  initTheme({ storageKey: THEME_KEY });
+  let scheme = "dark";
   try {
-    if (!localStorage.getItem(THEME_KEY)) setThemeMode("dark");
+    scheme = localStorage.getItem("color-scheme") ?? scheme;
   } catch {
-    setThemeMode("dark");
+    // Storage can be unavailable; keep the default.
   }
+  document.documentElement.setAttribute("data-color-scheme", scheme);
   mount(App, { target: document.getElementById("app")! });
 }
