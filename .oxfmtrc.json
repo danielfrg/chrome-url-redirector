@@ -5,11 +5,5 @@
   "tabWidth": 2,
   "printWidth": 100,
   "trailingComma": "all",
-  "ignorePatterns": [
-    "dist/**",
-    ".output/**",
-    ".wxt/**",
-    "assets/theme.css",
-    "assets/components.css"
-  ]
+  "ignorePatterns": ["dist/**", ".output/**", ".wxt/**", "src/design-system/**"]
 }

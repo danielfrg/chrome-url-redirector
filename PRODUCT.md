@@ -6,7 +6,7 @@ web
 
 ## Stack
 
-Chrome Manifest V3 built with WXT, Svelte 5 and kit-ui (shared theme). The background service worker is plain JavaScript with no UI dependencies.
+Chrome Manifest V3 built with WXT, Svelte 5 and ui-sdk (shared Cadence theme). The background service worker is plain JavaScript with no UI dependencies.
 
 ## Users
 

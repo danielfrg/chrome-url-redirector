@@ -15,8 +15,9 @@
     "lint": "oxlint"
   },
   "dependencies": {
-    "@kenn-io/kit-ui": "github:kenn-io/kit-ui#dc7a4184843343cb1fa639ea6e77b68d13e755af",
-    "@lucide/svelte": "^1.21.0"
+    "@lucide/svelte": "^1.74.0",
+    "@ui-sdk/core": "0.1.0-beta.7",
+    "@ui-sdk/svelte": "0.1.0-beta.7"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.2.0",

@@ -4,6 +4,8 @@ Chrome extension to redirect URLs based on patterns.
 
 This extension is simple, OSS, no data collected.
 
+**Personal project**: This is completely vibe coded for my own personal use. I won't be accepting feature requests or PRs. You're welcome to fork it and make it your own.
+
 ![screenshot](docs/screenshot.png)
 
 ## Usage
@@ -23,7 +25,7 @@ template:
 
 ## Development
 
-Built with [WXT](https://wxt.dev), Svelte 5 and kit-ui.
+Built with [WXT](https://wxt.dev), Svelte 5 and ui-sdk. `src/design-system/` is synced from the shared design system and never edited by hand.
 
 ```sh
 pnpm install

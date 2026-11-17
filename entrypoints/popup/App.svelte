@@ -1,6 +1,9 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { Button, ThemeToggle } from "@kenn-io/kit-ui";
+  import { Button } from "@ui-sdk/svelte/button";
+  import { Preferences } from "@ui-sdk/svelte/preferences";
+  import { ThemeToggle } from "../../src/design-system/custom/theme-toggle";
+  import { colorScheme } from "../../lib/color-scheme";
   import { loadRules, RULES_KEY } from "../../lib/storage.js";
 
   let count = $state(0);
@@ -17,36 +20,20 @@
   });
 </script>
 
-<main class="popup">
-  <header class="top">
-    <div class="brand">
-      <img src="/icon/32.png" alt="" width="24" height="24" />
-      <h1>URL Redirector</h1>
-    </div>
-    <ThemeToggle />
-  </header>
+<Preferences preferences={[colorScheme]}>
+  <main class="popup">
+    <header class="popup-top">
+      <div class="brand">
+        <img src="/icon/32.png" alt="" width="24" height="24" />
+        <h1>URL Redirector</h1>
+      </div>
+      <ThemeToggle {colorScheme} />
+    </header>
 
-  <p class="muted" role="status" aria-live="polite">
-    {count === 0 ? "No redirect rules yet" : `${count} active ${count === 1 ? "rule" : "rules"}`}
-  </p>
+    <p class="muted" role="status" aria-live="polite">
+      {count === 0 ? "No redirect rules yet" : `${count} active ${count === 1 ? "rule" : "rules"}`}
+    </p>
 
-  <Button class="full" onclick={() => chrome.runtime.openOptionsPage()}>Manage rules</Button>
-</main>
-
-<style>
-  .popup {
-    width: 300px;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  :global(.full) {
-    width: 100%;
-  }
-</style>
+    <Button class="full" onclick={() => chrome.runtime.openOptionsPage()}>Manage rules</Button>
+  </main>
+</Preferences>

@@ -1,0 +1,30 @@
+/*
+ * ThemeToggle: an icon-only button that cycles light, dark and system.
+ * Reads only tokens.css. Import once.
+ *
+ * Also tells the browser which color scheme the saved choice means. tokens.css picks colors
+ * with light-dark(), which needs this, so any app using the shared color scheme imports it.
+ */
+
+:root,
+[data-color-scheme="system"] {
+  color-scheme: light dark;
+}
+
+[data-color-scheme="light"] {
+  color-scheme: light;
+}
+
+[data-color-scheme="dark"] {
+  color-scheme: dark;
+}
+
+.theme-toggle {
+  width: var(--size);
+  padding: 0;
+
+  & svg {
+    width: var(--size-icon);
+    height: var(--size-icon);
+  }
+}

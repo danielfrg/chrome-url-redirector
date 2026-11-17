@@ -2,10 +2,6 @@ import { defineConfig } from "wxt";
 
 export default defineConfig({
   modules: ["@wxt-dev/module-svelte"],
-  vite: () => ({
-    // Kit UI ships Svelte/TypeScript source; compile it with the extension.
-    optimizeDeps: { exclude: ["@kenn-io/kit-ui"] },
-  }),
   manifest: {
     name: "URL Redirector",
     description: "Redirect URLs based on patterns. Open source, no data collected.",
